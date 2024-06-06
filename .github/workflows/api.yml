@@ -1,32 +1,29 @@
-name: API Test and Deploy
+name: API Test and deploy
 on:
   push:
-    branches:
-      - main # Or your preferred deployment branch
     paths:
-      - "services/tasks_api/**"
-      - ".github/workflows/api.yml"
+      - 'services/tasks_api/**'
+      - '.github/workflows/api.yml'
 
 jobs:
-  test:
-    name: Code Quality and Tests
+  code-quality:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11"]  # Latest stable Python version
-        poetry-version: ["1.8.3"] # Latest poetry version (check if newer exists)
+        python-version: [3.9]
+        poetry-version: [1.3.2]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: services/tasks_api
     steps:
-      - uses: actions/checkout@v4 # Updated checkout action
-      - uses: actions/setup-python@v4 # Updated setup-python action
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
-          cache: "poetry" # Cache poetry dependencies for faster installs
-      - uses: abatilo/actions-poetry@v2 # Updated poetry action
+      - name: Install poetry
+        uses: abatilo/actions-poetry@v2.0.0
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - name: Install dependencies
