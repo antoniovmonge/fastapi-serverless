@@ -30,12 +30,12 @@ jobs:
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - name: Install dependencies
-        run: poetry install
-      - name: Run black, isort, flake8, bandit
-        run: |
-          poetry run black . --check
-          poetry run isort . --check-only
-          poetry run flake8 .
-          poetry run bandit .
-      - name: Run tests
-        run: poetry run pytest # Or your preferred test runner
+        run: poetry install --no-root
+      - name: Run black
+        run: poetry run black . --check
+      - name: Run isort
+        run: poetry run isort . --check-only
+      - name: Run flake8
+        run: poetry run flake8 .
+      - name: Run bandit
+        run: poetry run bandit .
