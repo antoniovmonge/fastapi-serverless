@@ -30,3 +30,15 @@ This app aims to follow Test Driven Development (TDD) principles. The tests are 
 - [AWS S3 bucket](https://aws.amazon.com/s3/)
 - [GitHub Actions](https://github.com/features/actions)
 - [Pytest](https://docs.pytest.org/en/stable/)
+
+### Notes
+
+Replaced `moto` with `localstack` for mocking DynamoDB.
+
+```bash
+docker pull localstack/localstack
+```
+
+```bash
+docker run -d -p 4566:4566 -p 4571:4571 localstack/localstack
+```
